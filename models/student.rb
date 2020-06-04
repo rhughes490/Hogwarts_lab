@@ -1,3 +1,5 @@
+require_relative('../db/sql_runner')
+
 class Student 
     attr_reader :id, :first_name, :second_name, :house, :age
 
@@ -22,6 +24,10 @@ class Student
         $4) RETURNING id;"
         values = [@first_name, @second_name, @house, @age]
         @id = SqlRunner.run(sql, values)[0]['id'].to_i
+    end
+
+    def pretty_name()
+      return "#{@first_name} #{@second_name}"
     end
 
     def self.all()
